@@ -1,0 +1,21 @@
+package Teste;
+
+import static org.junit.jupiter.api.Assertions.*; 
+import org.junit.jupiter.api.Test;                
+
+import Carrinho.Carrinho;
+import Produto.Produto;
+
+public class Carrinho_Teste {
+	
+	private Carrinho carrinho = new Carrinho();
+    
+    @Test
+    public void testValorTotal() {
+        Produto p1 = new Produto("Item1", 10.0);   
+        Produto p2 = new Produto("Item2", 20.0);   
+        carrinho.addItem(p1);                      
+        carrinho.addItem(p2);
+        assertEquals(30.0, carrinho.getValorTotal()); 
+    }
+}
