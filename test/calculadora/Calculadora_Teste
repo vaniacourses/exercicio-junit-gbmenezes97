@@ -1,0 +1,16 @@
+package Teste;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import Calculadora.Calculadora;
+
+public class Calculadora_Teste {
+	@Test
+	public void multiplicacaoTest() {
+		Calculadora calc = new Calculadora();
+		int resultado = calc.multiplicacao(15, 15);
+		assertEquals(225,resultado);
+	}
+}
