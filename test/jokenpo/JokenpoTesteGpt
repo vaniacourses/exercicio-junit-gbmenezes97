@@ -1,0 +1,44 @@
+package jokenpo;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class JokenpoTest {
+
+    private Jokenpo jokenpo;
+
+    @BeforeEach
+    void setUp() {
+        jokenpo = new Jokenpo();
+    }
+
+    // ---- Empates ----
+    @Test
+    void testEmpatePapelVsPapel() {
+        assertEquals(0, jokenpo.jogar(1, 1));
+    }
+
+    @Test
+    void testEmpatePedraVsPedra() {
+        assertEquals(0, jokenpo.jogar(2, 2));
+    }
+
+    @Test
+    void testEmpateTesouraVsTesoura() {
+        assertEquals(0, jokenpo.jogar(3, 3));
+    }
+
+    // ---- Jogador 1 vence ----
+    @Test
+    void testJogador1VencePapelVsPedra() {
+        assertEquals(1, jokenpo.jogar(1, 2));
+    }
+
+    @Test
+    void testJogador1VencePedraVsTesoura() {
+        assertEquals(1, jokenpo.jogar(2, 3));
+    }
+
+    @Test
+    void testJogador1VenceTesouraVsPapel
