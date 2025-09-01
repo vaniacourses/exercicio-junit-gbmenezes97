@@ -1,0 +1,73 @@
+package Carrinho;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import Produto.Produto;
+import Produto.ProdutoNaoEncontradoException;
+
+public class CarrinhoTest {
+
+    private Carrinho carrinho;
+    private Produto p1;
+    private Produto p2;
+    private Produto p3;
+
+    @BeforeEach
+    void setUp() {
+        carrinho = new Carrinho();
+        p1 = new Produto("Arroz", 10.0);
+        p2 = new Produto("Feijão", 8.5);
+        p3 = new Produto("Macarrão", 5.0);
+    }
+
+    // ---- addItem & getQtdeItems ----
+    @Test
+    void testAddItemIncrementaQuantidade() {
+        carrinho.addItem(p1);
+        carrinho.addItem(p2);
+        assertEquals(2, carrinho.getQtdeItems());
+    }
+
+    @Test
+    void testAddItemDuplicadoContaSeparado() {
+        carrinho.addItem(p1);
+        carrinho.addItem(p1);
+        assertEquals(2, carrinho.getQtdeItems());
+    }
+
+    // ---- removeItem ----
+    @Test
+    void testRemoveItemExistente() throws ProdutoNaoEncontradoException {
+        carrinho.addItem(p1);
+        carrinho.addItem(p2);
+        carrinho.removeItem(p1);
+        assertEquals(1, carrinho.getQtdeItems());
+        assertFalse(carrinho.getValorTotal() == 18.5); // valor mudou
+    }
+
+    @Test
+    void testRemoveItemNaoExistenteLancaExcecao() {
+        assertThrows(ProdutoNaoEncontradoException.class, () -> carrinho.removeItem(p3));
+    }
+
+    @Test
+    void testRemoveItemDuplicadoRemoveSomenteUm() throws ProdutoNaoEncontradoException {
+        carrinho.addItem(p1);
+        carrinho.addItem(p1);
+        carrinho.removeItem(p1);
+        assertEquals(1, carrinho.getQtdeItems());
+    }
+
+    // ---- esvazia ----
+    @Test
+    void testEsvaziaCarrinho() {
+        carrinho.addItem(p1);
+        carrinho.addItem(p2);
+        carrinho.addItem(p3);
+        carrinho.esvazia();
+        assertEquals(0, carrinho.getQtdeItems());
+        assertEquals(0.0, carrinho.getValorTotal(), 0.0001);
+    }
+}
