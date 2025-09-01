@@ -1,0 +1,128 @@
+package Calculadora;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class CalculadoraTest {
+
+    private Calculadora calc;
+
+    @BeforeEach
+    void setUp() {
+        calc = new Calculadora();
+    }
+
+    // ---- soma ----
+    @Test
+    void testSomaValoresPositivos() {
+        assertEquals(7, calc.soma(3, 4));
+    }
+
+    @Test
+    void testSomaValoresNegativos() {
+        assertEquals(-10, calc.soma(-5, -5));
+    }
+
+    @Test
+    void testSomaComZero() {
+        assertEquals(5, calc.soma(5, 0));
+    }
+
+    // ---- subtracao ----
+    @Test
+    void testSubtracaoValoresPositivos() {
+        assertEquals(2, calc.subtracao(5, 3));
+    }
+
+    @Test
+    void testSubtracaoComNegativos() {
+        assertEquals(-2, calc.subtracao(-5, -3));
+    }
+
+    @Test
+    void testSubtracaoComZero() {
+        assertEquals(7, calc.subtracao(7, 0));
+    }
+
+    // ---- multiplicacao ----
+    @Test
+    void testMultiplicacaoPositivos() {
+        assertEquals(20, calc.multiplicacao(4, 5));
+    }
+
+    @Test
+    void testMultiplicacaoComZero() {
+        assertEquals(0, calc.multiplicacao(10, 0));
+    }
+
+    @Test
+    void testMultiplicacaoNegativos() {
+        assertEquals(-12, calc.multiplicacao(-3, 4));
+    }
+
+    // ---- divisao ----
+    @Test
+    void testDivisaoPositivos() {
+        assertEquals(2, calc.divisao(10, 5));
+    }
+
+    @Test
+    void testDivisaoNegativos() {
+        assertEquals(-3, calc.divisao(-9, 3));
+    }
+
+    @Test
+    void testDivisaoPorZeroLancaExcecao() {
+        assertThrows(ArithmeticException.class, () -> calc.divisao(10, 0));
+    }
+
+    // ---- somatoria ----
+    @Test
+    void testSomatoriaNumeroPositivo() {
+        // 1 + 2 + 3 + 4 + 5 = 15
+        assertEquals(15, calc.somatoria(5));
+    }
+
+    @Test
+    void testSomatoriaZero() {
+        assertEquals(0, calc.somatoria(0));
+    }
+
+    @Test
+    void testSomatoriaNegativoRetornaZero() {
+        assertEquals(0, calc.somatoria(-5));
+    }
+
+    // ---- ehPositivo ----
+    @Test
+    void testEhPositivoComPositivo() {
+        assertTrue(calc.ehPositivo(10));
+    }
+
+    @Test
+    void testEhPositivoComZero() {
+        assertTrue(calc.ehPositivo(0));
+    }
+
+    @Test
+    void testEhPositivoComNegativo() {
+        assertFalse(calc.ehPositivo(-1));
+    }
+
+    // ---- compara ----
+    @Test
+    void testComparaIguais() {
+        assertEquals(0, calc.compara(5, 5));
+    }
+
+    @Test
+    void testComparaPrimeiroMaior() {
+        assertEquals(1, calc.compara(10, 3));
+    }
+
+    @Test
+    void testComparaSegundoMaior() {
+        assertEquals(-1, calc.compara(2, 8));
+    }
+}
